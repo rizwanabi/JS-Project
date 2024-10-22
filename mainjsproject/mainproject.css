@@ -1,0 +1,299 @@
+html {
+    box-sizing: border-box;
+  }
+
+  *, *::before, *::after {
+    box-sizing: inherit;
+  }
+
+  html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #b4fee7;
+  }
+
+  body {
+    font-family: 'Concert One', 'Coda', san-serif, cursive;
+  }
+
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .score-table {
+    text-align: left;
+    width: 500px;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    animation: fadeIn 1s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+      0% {
+          opacity: 0;
+      }
+      100% {
+          opacity: 1;
+      }
+  }
+
+  .stars {
+    display: flex;
+    list-style: none;
+    transition: color 0.3s ease-in-out;
+  }
+
+  .stars li {
+    animation: starBounce 2s infinite ease-in-out;
+  }
+
+  @keyframes starBounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-10px);
+    }
+    60% {
+      transform: translateY(-5px);
+    }
+  }
+
+  .restart {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+  .restart:hover {
+    transform: rotate(360deg);
+  }
+
+  .deck {
+    background: linear-gradient(140deg, #fd49a0 2%, #E5E9EC 36%, #fd49a0 120%);
+    margin: 0;
+    width: 612px;
+    min-height: 500px;
+    box-shadow: 10px 9px 31px 1px rgba(0, 0, 0, 0.75);
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 20px;
+    margin-bottom: 15px;
+    align-items: center;
+  }
+
+  .card {
+    width: 125px;
+    height: 125px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 1) 100%);
+    box-shadow: 5px 5px 24px -3px rgba(0, 0, 0, 0.75);
+    border-radius: 8px;
+    font-size: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+    margin-top: 15px;
+    cursor: pointer;
+    perspective: 1000px;
+    transition: transform 0.5s ease, background-color 0.3s ease;
+  }
+
+  .card:hover {
+    transform: scale(1.1);
+  }
+
+  .card.show {
+    transform: rotateY(180deg);
+    transition: transform 0.6s ease-in-out;
+    background: #f7d6d0;
+    font-size: 33px;
+    cursor: default;
+  }
+
+  .card.match {
+    background:  #a16ae8;
+    transform: rotateY(360deg);
+    transition: transform 0.5s ease-in-out, background 0.5s ease;
+  }
+
+  .card.no-match {
+    background: #D3CAE2;
+    animation: shake 0.5s;
+    transition: background 0.3s, transform 0.3s ease;
+  }
+
+  @keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+  }
+
+  .modal {
+    z-index: 1;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.1);
+    transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s ease-in-out;
+  }
+
+  .modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color:  #f8ea8c;
+    padding: 1rem 1.5rem;
+    width: 35rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease-in-out;
+    animation: modalPop 0.5s ease;
+  }
+
+  @keyframes modalPop {
+    0% {
+      transform: translate(-50%, -50%) scale(0.8);
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+
+  .close-button {
+    float: right;
+    width: 1.5rem;
+    line-height: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    background-color: lightgray;
+  }
+
+  .close-button:hover {
+    background-color: darkgray;
+    transform: scale(1.2);
+  }
+
+  .show-modal {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1.0);
+    transition: visibility 0s linear 0s, opacity 0.25s ease-in-out, transform 0.25s ease-in-out;
+  }
+
+  .tick {
+    color: #961086;
+    font-size: 60px;
+    margin-left: 35px;
+    transition: transform 0.3s ease-in-out;
+    animation: tickBounce 1s infinite ease-in-out;
+  }
+
+  @keyframes tickBounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-10px);
+    }
+    60% {
+      transform: translateY(-5px);
+    }
+  }
+
+  .modal-heading {
+    letter-spacing: 2px;
+    transition: color 0.3s ease;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .modal-heading:hover {
+    color: #310a7a;
+  }
+
+  .stats {
+    color: #8b1517;
+    margin-top: 30px;
+    /* color: black; */
+  }
+
+  .new-game {
+    background:  black;
+    color: #fff;
+    border: 0;
+    border-radius: 50%;
+    padding: 1em 2em;
+    font-size: 1.2em;
+    cursor: pointer;
+    margin-top: 25px;
+    transition: background 0.3s ease;
+  }
+
+  .new-game:hover {
+    background: #bd5799;
+    transform: scale(1.1);
+    color: black;
+  }
+
+  @media screen and (max-width: 600px) {
+    .deck {
+        width: 350px;
+        min-height: 280px;
+    }
+    .card {
+        width: 68px;
+        height: 68px;
+    }
+    .show {
+        font-size: 30px;
+    }
+    .modal-content {
+        width: 15rem;
+    }
+    .tick {
+        color: #1803A5;
+        font-size: 45px;
+        margin-left: 25px;
+    }
+    h1 {
+        font-size: 20px;
+    }
+    h3 {
+        font-size: 16px;
+    }
+    .score-table {
+        width: 320px;
+    }
+  }
